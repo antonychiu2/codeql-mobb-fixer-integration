@@ -12,21 +12,21 @@ on:
   pull_request:
     branches: ["*"]
 
-# jobs:
-#   scan-and-fix:
-#     name: Scan with CodeQL and fix with Mobb
-#     runs-on: 'ubuntu-latest'
-#     timeout-minutes: 360
-#     permissions:
-#       pull-requests: write
-#       statuses: write
+jobs:
+  scan-and-fix:
+    name: Scan with CodeQL and fix with Mobb
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 360
+    permissions:
+      pull-requests: write
+      statuses: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: ["java-kotlin"]
-        # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
-        codeql_output_filename: ["java.sarif"]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     language: ["java-kotlin"]
+    #     # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
+    #     codeql_output_filename: ["java.sarif"]
 
     steps:
       - name: Checkout repository
