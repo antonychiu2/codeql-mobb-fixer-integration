@@ -12,14 +12,14 @@ on:
   pull_request:
     branches: ["*"]
 
-# jobs:
-#   scan-and-fix:
-#     name: Scan with CodeQL and fix with Mobb
-#     runs-on: 'ubuntu-latest'
-#     timeout-minutes: 360
-#     permissions:
-#       pull-requests: write
-#       statuses: write
+jobs:
+  scan-and-fix:
+    name: Scan with CodeQL and fix with Mobb
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 360
+    permissions:
+      pull-requests: write
+      statuses: write
 
     strategy:
       fail-fast: false
