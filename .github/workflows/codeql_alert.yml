@@ -1,20 +1,28 @@
-name: CodeQL Scan Alert Handler
+name: Handle CodeQL Scan Results
 
 on:
-  code_scanning_alert:
-    types: [created, fixed, reopened]
+  workflow_run:
+    workflows: ["CodeQL"]
+    types:
+      - completed
 
 jobs:
-  handle_alert:
+  handle_codeql_scan:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Print alert details
+      - name: List SARIF files
         run: |
-          echo "Code scanning alert ID: ${{ github.event.alert.id }}"
-          echo "Code scanning alert state: ${{ github.event.alert.state }}"
-          echo "Code scanning alert rule ID: ${{ github.event.alert.rule.id }}"
-          echo "Code scanning alert rule description: ${{ github.event.alert.rule.description }}"
+          echo "Listing SARIF files..."
+          ls -l ${{ github.workspace }}/.github/workflows/results/
+          
+      - name: Process SARIF files
+        run: |
+          for file in ${{ github.workspace }}/.github/workflows/results/*.sarif; do
+            echo "Processing $file"
+            # Add your processing logic here
+          done
