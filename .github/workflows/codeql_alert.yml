@@ -18,11 +18,5 @@ jobs:
       - name: List SARIF files
         run: |
           echo "Listing SARIF files..."
-          ls -l ${{ github.workspace }}/.github/workflows/results/
+          ls -lah
           
-      - name: Process SARIF files
-        run: |
-          for file in ${{ github.workspace }}/.github/workflows/results/*.sarif; do
-            echo "Processing $file"
-            # Add your processing logic here
-          done
