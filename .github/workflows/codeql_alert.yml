@@ -15,8 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: List SARIF files
+      - name: Prepare Environment
         run: |
           echo "Listing SARIF files..."
           ls -lah
+          env
           
