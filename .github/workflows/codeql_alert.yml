@@ -20,4 +20,8 @@ jobs:
           echo "Listing SARIF files..."
           ls -lah
           env
+          echo "github.event.workflow_run.event" is ${{ github.event.workflow_run.event }}
+          echo "github.event.workflow_run.head_sha" is ${{ github.event.workflow_run.head_sha }}
+          echo "github.event.workflow_run.head_commit.id" is ${{ github.event.workflow_run.head_commit.id }}
+          
           
