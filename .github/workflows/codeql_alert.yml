@@ -20,6 +20,7 @@ jobs:
           echo "Listing SARIF files..."
           ls -lah
           env
+          echo "github.event_name" is ${{ toJSON(github.event_name) }}
           echo "github.event.workflow_run.event" is ${{ toJSON(github.event.workflow_run.event) }}
           echo "github.event.workflow_run.head_sha" is ${{ github.event.workflow_run.head_sha }}
           echo "github.event.workflow_run.head_commit.id" is ${{ github.event.workflow_run.head_commit.id }}
@@ -27,8 +28,8 @@ jobs:
           echo "github.event.workflow_run.referenced_workflows.path" is ${{ github.event.workflow_run.referenced_workflows.path }}        
           echo "github.event.workflow_run.triggering_actor.id" is ${{ github.event.workflow_run.triggering_actor.id }}          
           echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }}          
-          echo "github.event.workflow_run.pull_requests" is ${{ toJSON(github.event.workflow_run.pull_requests) }}          
-          echo "github.event.workflow_run" is ${{ toJSON(github.event.workflow_run) }}          
+          #echo "github.event.workflow_run.pull_requests" is ${{ toJSON(github.event.workflow_run.pull_requests) }}          
+          echo "github.event.workflow_run" is ${{ toJSON(github.event.workflow_run) }}
           echo "github.event.workflow_run" is ${{ github.event.workflow_run }}          
           
           
