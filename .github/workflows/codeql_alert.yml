@@ -35,7 +35,7 @@ jobs:
 
           echo "$PR_CONTEXT"
 
-
+          head_sha=${{ github.event.workflow_run.head_sha }}
           URL=$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/code-scanning/analyses
           response=$(curl -H "Authorization: Bearer $GITHUB_TOKEN" $URL)
           ids=$(echo "$response" | jq -r --arg sha "$head_sha" '.[] | select(.commit_sha == $sha) | .id')
