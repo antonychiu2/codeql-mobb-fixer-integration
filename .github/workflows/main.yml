@@ -1,0 +1,20 @@
+name: CodeQL test
+
+on:
+  pull_request: 
+     types: [opened, reopened]
+  
+jobs:
+  test_run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Prepare Environment
+        run: |
+          
+          # ls -lah
+          env
+          
