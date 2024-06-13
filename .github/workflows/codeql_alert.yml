@@ -4,7 +4,8 @@ on:
   # pull_request: 
   #   types: [opened, reopened]
   workflow_run:
-    workflows: ["CodeQL"]
+    # workflows: ["CodeQL"]
+    workflows: ["CodeQL test"]
     types:
       - completed
 
