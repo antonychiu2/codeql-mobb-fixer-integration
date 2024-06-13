@@ -22,7 +22,7 @@ jobs:
         run: |
           
           # ls -lah
-          env
+          # env
           echo "github.event_name" is ${{ github.event_name }}
           echo "github.event.workflow_run.event" is ${{ github.event.workflow_run.event }}
           echo "github.event.workflow_run.conclusion" is ${{ github.event.workflow_run.conclusion }}
@@ -30,14 +30,18 @@ jobs:
           echo "github.event.workflow_run.head_commit.id" is ${{ github.event.workflow_run.head_commit.id }}
           echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }} 
           echo "github.event.workflow_run.pull_requests" is ${{ github.event.workflow_run.pull_requests }} 
-          echo "github.event.workflow_run.pull_requests.length" is ${{ github.event.workflow_run.pull_requests.length }} 
+
+          echo "$PR_CONTEXT"
+
           
           if [ "${{ github.event.workflow_run.pull_requests }} " == "" ]; then
             echo "github.event.workflow_run.pull_requests is empty"
           else
             echo "github.event.workflow_run.pull_requests has content"
           fi
-
+        env:
+            PR_CONTEXT: ${{ toJson(github.event.workflow_run.pull_requests) }}
+            
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
