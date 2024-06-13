@@ -27,7 +27,7 @@ jobs:
           echo "github.event.workflow_run.conclusion" is ${{ github.event.workflow_run.conclusion }}
           echo "github.event.workflow_run.head_sha" is ${{ github.event.workflow_run.head_sha }}
           echo "github.event.workflow_run.head_commit.id" is ${{ github.event.workflow_run.head_commit.id }}
-          echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }}
+          echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }} 
                     
       - name: Dump GitHub context
         env:
