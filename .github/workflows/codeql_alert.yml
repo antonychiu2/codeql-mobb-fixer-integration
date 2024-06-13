@@ -35,12 +35,38 @@ jobs:
 
           echo "$PR_CONTEXT"
 
+
+          URL=$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/code-scanning/analyses
+          response=$(curl -H "Authorization: Bearer $GITHUB_TOKEN" $URL)
+          ids=$(echo "$response" | jq -r --arg sha "$head_sha" '.[] | select(.commit_sha == $sha) | .id')
           
-          if [ "${{ github.event.workflow_run.pull_requests }} " == "" ]; then
-            echo "github.event.workflow_run.pull_requests is empty"
-          else
-            echo "github.event.workflow_run.pull_requests has content"
-          fi
+          # Initialize sarif_output.json with the base structure
+          echo '{
+          	"runs": [],
+          	"version": "2.1.0"
+          }' > sarif_output.json
+          
+          # Loop through each ID
+          for id in $ids; do
+            echo "Found Analysis ID: $id"
+          
+            # Fetch the SARIF response
+            sarif_response=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/sarif+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/code-scanning/analyses/$id")
+            
+            # Save the response to a temporary file
+            echo "$sarif_response" > current_sarif.json
+          
+            # Combine the current sarif_output.json with the new SARIF response
+            jq -s '{"version": "2.1.0", "runs": (.[0].runs + .[1].runs)}' sarif_output.json current_sarif.json > temp_sarif_output.json
+          
+            # Move the temporary file to sarif_output.json
+            mv temp_sarif_output.json sarif_output.json
+          
+          done
+
+          
+         
+          
         env:
             PR_CONTEXT: ${{ toJson(github.event.workflow_run.pull_requests) }}
             
