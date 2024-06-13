@@ -1,7 +1,7 @@
 name: Handle CodeQL Scan Results
 
 on:
-  push: 
+  pull request: 
   # workflow_run:
   #   workflows: ["CodeQL"]
   #   types:
