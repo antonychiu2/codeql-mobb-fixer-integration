@@ -1,12 +1,12 @@
 name: Handle CodeQL Scan Results
 
 on:
-  pull_request: 
-    types: [opened, reopened]
-  # workflow_run:
-  #   workflows: ["CodeQL"]
-  #   types:
-  #     - completed
+  # pull_request: 
+  #   types: [opened, reopened]
+  workflow_run:
+    workflows: ["CodeQL"]
+    types:
+      - completed
 
 jobs:
   handle_codeql_scan:
