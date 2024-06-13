@@ -2,6 +2,7 @@ name: Handle CodeQL Scan Results
 
 on:
   pull request: 
+    types: [opened, reopened]
   # workflow_run:
   #   workflows: ["CodeQL"]
   #   types:
