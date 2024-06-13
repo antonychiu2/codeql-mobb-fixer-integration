@@ -64,6 +64,9 @@ jobs:
           
           done
 
+          ls -l
+          cat sarif_output.json
+
           
          
           
