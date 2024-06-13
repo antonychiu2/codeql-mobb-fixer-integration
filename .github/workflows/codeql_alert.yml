@@ -33,9 +33,6 @@ jobs:
           echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }}
           echo "github.event.workflow_run.pull_requests" is ${{ github.event.workflow_run.pull_requests }}          
           echo "github.event.workflow_run.pull_requests.id" is ${{ github.event.workflow_run.pull_requests.id }}          
-          echo "${{ toJSON(github.event.workflow_run.pull_requests) }}" | jq -c '.[]' | while read -r pr; do
-            echo "Pull request: $pr"
-          done
 
           #echo "github.event.workflow_run" is ${{ toJSON(github.event.workflow_run) }}
           #echo "github.event.workflow_run" is ${{ github.event.workflow_run }}          
