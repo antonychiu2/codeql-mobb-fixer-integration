@@ -29,7 +29,12 @@ jobs:
           echo "github.event.workflow_run.head_commit.id" is ${{ github.event.workflow_run.head_commit.id }}
           echo "github.event.workflow_run.triggering_actor.url" is ${{ github.event.workflow_run.url }} 
           echo "github.event.workflow_run.pull_requests" is ${{ github.event.workflow_run.pull_requests }} 
-          
+          if [ "${{ github.event.workflow_run.pull_requests }} " == "" ]; then
+            echo "github.event.workflow_run.pull_requests is empty"
+          else
+            echo "github.event.workflow_run.pull_requests has content"
+          fi
+
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
