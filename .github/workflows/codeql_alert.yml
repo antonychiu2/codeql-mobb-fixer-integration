@@ -1,10 +1,11 @@
 name: Handle CodeQL Scan Results
 
 on:
-  workflow_run:
-    workflows: ["CodeQL"]
-    types:
-      - completed
+  push: 
+  # workflow_run:
+  #   workflows: ["CodeQL"]
+  #   types:
+  #     - completed
 
 jobs:
   handle_codeql_scan:
