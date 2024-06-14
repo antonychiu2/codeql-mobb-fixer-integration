@@ -52,7 +52,7 @@ jobs:
           echo ids=$ids
           
           if [ -z "$ids" ]; then
-            echo "Error: No matching IDs found for the given SHA." >&2
+            echo "Error: No matching IDs found for the given head SHA $head_sha." >&2
             exit 1
           fi
 
