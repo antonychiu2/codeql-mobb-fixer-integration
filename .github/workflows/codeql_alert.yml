@@ -41,6 +41,7 @@ jobs:
           echo "analyses list URL=$URL"
           response=$(curl -H "Authorization: Bearer $GITHUB_TOKEN" $URL)
           echo length of response=$(expr length "$response")
+          echo response for analyses list=$response
           ids=$(echo "$response" | jq -r --arg sha "$head_sha" '.[] | select(.commit_sha == $sha) | .id')
           echo ids=$ids
           
@@ -58,7 +59,7 @@ jobs:
             # Fetch the SARIF response
             sarif_response=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/sarif+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/code-scanning/analyses/$id")
             echo length of sarif_response=$(expr length "$sarif_response")
-            echo sarif_response for analyses list=$sarif_response
+            echo sarif content=$sarif_response
 
             # Save the response to a temporary file
             echo "$sarif_response" > current_sarif.json
