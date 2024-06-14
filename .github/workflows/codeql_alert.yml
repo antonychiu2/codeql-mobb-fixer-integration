@@ -51,6 +51,11 @@ jobs:
           ids=$(echo "$response" | jq -r --arg sha "$head_sha" '.[] | select(.commit_sha == $sha) | .id')
           echo ids=$ids
           
+          if [ -z "$ids" ]; then
+            echo "Error: No matching IDs found for the given SHA." >&2
+            exit 1
+          fi
+
           echo Initialize sarif_output.json with the base structure
           echo '{
           	"runs": [],
