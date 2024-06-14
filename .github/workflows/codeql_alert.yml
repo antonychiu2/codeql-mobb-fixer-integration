@@ -113,6 +113,10 @@ jobs:
         with:
           name: my-artifact
           path: sarif_output.json
+          if: always()
+
+      
+      
        
       - name: Dump GitHub context
         env:
