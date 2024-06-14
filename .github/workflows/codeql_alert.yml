@@ -79,6 +79,8 @@ jobs:
           
         env:
             PR_CONTEXT: ${{ toJson(github.event.workflow_run.pull_requests) }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             
       - name: Dump GitHub context
         env:
