@@ -8,6 +8,11 @@ on:
     # workflows: ["CodeQL test"]
     types:
       - completed
+      
+permissions:
+  issues: write
+  pull-requests: write
+  security-events: write
 
 jobs:
   handle_codeql_scan:
