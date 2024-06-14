@@ -82,13 +82,33 @@ jobs:
           ls -l
           # cat sarif_output.json
 
+          REPO=$(git remote get-url origin)
+          REPO=${REPO%".git"}
+          SCANNER=codeql
+          PR_NUMBER=$(echo $PR_CONTEXT | jq '.[0].number')
+          GITHUB_HEAD_REF=$(echo $PR_CONTEXT | jq -r '.[0].head.ref')
+          #GITHUB_HEAD_REF=$(curl --header 'authorization: Bearer ${{ inputs.github-token }}' -s ${{github.event.issue.pull_request.url }} | jq -r '.head.ref')
+          GITHUB_SHA=$head_sha
+          echo REPO: $REPO
+          echo GITHUB_HEAD_REF: $GITHUB_HEAD_REF
+          echo GITHUB_SHA: $GITHUB_SHA
+          echo PR_NUMBER: $PR_NUMBER
+          OUT=$(npx --yes mobbdev@latest review  -r $REPO --ref $GITHUB_HEAD_REF --ch $GITHUB_SHA --api-key ${{ secrets.MOBB_API_TOKEN }} -f sarif_output.json  --pr $PR_NUMBER --github-token ${{ secrets.GITHUB_TOKEN }} --scanner $SCANNER)
+          RETVAL=$?
+          if [ $RETVAL -ne 0 ]; then
+            exit $RETVAL
+          fi
+          OUT=$(echo $OUT | tr '\n' ' ')
+          echo "fix-report-url=$OUT" >> $GITHUB_OUTPUT
+          echo "Mobb URL: $OUT"
           
          
           
         env:
             PR_CONTEXT: ${{ toJson(github.event.workflow_run.pull_requests) }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+        shell: bash -l {0}
+
       - uses: actions/upload-artifact@v4
         with:
           name: my-artifact
