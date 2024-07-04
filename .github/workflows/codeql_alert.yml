@@ -2,8 +2,8 @@ name: Handle CodeQL Scan Results
 
 on:
   workflow_run:
-    # workflows: ["CodeQL"]
-    workflows: ["CodeQL test"]
+    workflows: ["CodeQL"]
+    # workflows: ["CodeQL test"]
     types:
       - completed
       
