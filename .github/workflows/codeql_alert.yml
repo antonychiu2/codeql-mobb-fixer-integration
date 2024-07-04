@@ -13,7 +13,7 @@ on:
 jobs:
   handle_codeql_scan:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' && toJSON(github.event.workflow_run.pull_requests) != '[]' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' && toJSON(github.event.workflow_run.pull_requests) != '[]' }}
     permissions:
       pull-requests: write
       security-events: write
@@ -23,6 +23,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: 
+        run:|
+          env
+          echo ${{ github.event.workflow_run.conclusion }}
+          echo ${{ toJSON(github.event.workflow_run.pull_requests) != '[]' }}
+          
       - uses: mobb-dev/codeql-mobb-fixer-action@main
         with:
           mobb-api-token: ${{ secrets.MOBB_API_TOKEN }}
