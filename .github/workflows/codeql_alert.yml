@@ -28,6 +28,8 @@ jobs:
           
           echo "github.event.workflow_run.head_branch = " ${{ github.event.workflow_run.head_branch }}
           echo "contains(github.event.workflow_run.head_branch,'refs/pull') = " ${{ contains(github.event.workflow_run.head_branch,'refs/pull') }}
+          echo $(curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -s ${{github.event.workflow_run.repository.url}}/pulls/50 | jq -r '.head.ref')
+
           env
         shell: bash -l {0}
       - uses: mobb-dev/codeql-mobb-fixer-action@main
