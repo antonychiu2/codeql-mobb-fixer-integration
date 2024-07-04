@@ -2,8 +2,8 @@ name: Handle CodeQL Scan Results
 
 on:
   workflow_run:
-    workflows: ["CodeQL"]
-    # workflows: ["CodeQL test"]
+    # workflows: ["CodeQL"]
+    workflows: ["CodeQL test"]
     types:
       - completed
       
@@ -12,7 +12,7 @@ jobs:
   handle_codeql_scan:
     runs-on: ubuntu-latest
     # if: ${{ github.event.workflow_run.conclusion == 'success' && toJSON(github.event.workflow_run.pull_requests) != '[]' }}
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.head_branch,'ref/pull') }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.head_branch,'ref/pull') }}
     permissions:
       pull-requests: write
       security-events: write
@@ -25,6 +25,9 @@ jobs:
 
       - name: 
         run: |
+          
+          echo "github.event.workflow_run.head_branch = " ${{ github.event.workflow_run.head_branch,'ref/pull }}
+          echo "contains(github.event.workflow_run.head_branch,'ref/pull') = " ${{ contains(github.event.workflow_run.head_branch,'ref/pull') }}
           env
         shell: bash -l {0}
       - uses: mobb-dev/codeql-mobb-fixer-action@main
