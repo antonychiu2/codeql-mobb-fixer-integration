@@ -30,6 +30,8 @@ jobs:
           echo ${{ github.event.workflow_run.conclusion }}
           echo ${{ toJSON(github.event.workflow_run.pull_requests) }}
           echo ${{ toJSON(github.event.workflow_run) }}
+          echo ${{ toJSON(github.event.workflow_run.pulls_url) }}
+
           
           env
         shell: bash -l {0}
