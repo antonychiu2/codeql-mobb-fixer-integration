@@ -1,11 +1,9 @@
 name: Handle CodeQL Scan Results
 
 on:
-  # pull_request: 
-  #   types: [opened, reopened]
   workflow_run:
-    # workflows: ["CodeQL"]
-    workflows: ["CodeQL test"]
+    workflows: ["CodeQL"]
+    # workflows: ["CodeQL test"]
     types:
       - completed
       
@@ -26,9 +24,9 @@ jobs:
 
       - name: 
         run: |
-          echo ${{ github.event.workflow_run.conclusion }}
-          echo ${{ github.event.workflow_run }}          
-          echo ${{ toJSON(github.event.workflow_run) }}
+          # echo ${{ github.event.workflow_run.conclusion }}
+          # echo ${{ github.event.workflow_run }}          
+          # echo ${{ toJSON(github.event.workflow_run) }}
           
           
         shell: bash -l {0}
