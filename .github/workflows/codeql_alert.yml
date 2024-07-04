@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     # if: ${{ github.event.workflow_run.conclusion == 'success' && toJSON(github.event.workflow_run.pull_requests) != '[]' }}
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    
     permissions:
       pull-requests: write
       security-events: write
