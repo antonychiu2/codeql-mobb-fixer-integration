@@ -26,7 +26,7 @@ jobs:
       - name: 
         run: |
           
-          echo "github.event.workflow_run.head_branch = " ${{ github.event.workflow_run.head_branch,'ref/pull }}
+          echo "github.event.workflow_run.head_branch = " ${{ github.event.workflow_run.head_branch }}
           echo "contains(github.event.workflow_run.head_branch,'ref/pull') = " ${{ contains(github.event.workflow_run.head_branch,'ref/pull') }}
           env
         shell: bash -l {0}
