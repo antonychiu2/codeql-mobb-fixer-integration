@@ -12,7 +12,7 @@ jobs:
   handle_codeql_scan:
     runs-on: ubuntu-latest
     # if: ${{ github.event.workflow_run.conclusion == 'success' && toJSON(github.event.workflow_run.pull_requests) != '[]' }}
-    # if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.head_branch,'refs/pull') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.event.workflow_run.head_branch,'refs/pull') }}
     permissions:
       pull-requests: write
       security-events: write
