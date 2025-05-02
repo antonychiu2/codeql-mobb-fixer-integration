@@ -1,0 +1,22 @@
+# Mobb/Checkamrx Fixer on pull requests
+# This workflow defines the needed steps to run Checkmarx on every pull request and pass the results to Mobb Fixer.
+
+name: "Mobb/Checkmarx CLI"
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: testbench
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+
+    - name: test
+      run: |
+        echo "${{ github.event.pull_request.number }}" > pr_number.txt
+          echo "PR number: $(cat pr_number.txt)"
