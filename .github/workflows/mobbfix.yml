@@ -18,8 +18,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Dump github.event
+        run: cat $GITHUB_EVENT_PATH
+
       - uses: mobb-dev/codeql-mobb-fixer-action@v1.1
         with:
           mobb-api-token: ${{ secrets.MOBB_API_TOKEN }}
