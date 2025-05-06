@@ -1,7 +1,7 @@
 name: Mobb fix from CodeQL reports
 on:
   workflow_run:
-    workflows: ["CodeQL test"] # This workflow is triggered when the name specified here is triggered. In CodeQL Default Code Scanning Setup, this name is "CodeQL", if you are using CodeQL Advanced Setup, you may need to change this if you have a different workflow name. 
+    workflows: ["CodeQL Advanced"] # This workflow is triggered when the name specified here is triggered. In CodeQL Default Code Scanning Setup, this name is "CodeQL", if you are using CodeQL Advanced Setup, you may need to change this if you have a different workflow name. 
     types:
       - completed
 jobs:
